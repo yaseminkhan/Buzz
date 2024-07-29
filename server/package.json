@@ -1,4 +1,14 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
@@ -14,17 +24,11 @@
     "multer-gridfs-storage": "^5.0.2",
     "npx": "^10.2.2"
   },
-  "name": "server",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+  "devDependencies": {
+    "nodemon": "^2.0.0"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
+
