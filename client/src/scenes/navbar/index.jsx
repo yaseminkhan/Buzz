@@ -64,6 +64,7 @@ const Navbar = () => {
                 borderRadius= "9px" 
                 gap="3rem" 
                 padding ="0.1rem 1.5rem"
+                sx={{marginLeft: "1.75rem"}}
                 >
                     <InputBase placeholder="Search..." />
                     <IconButton>
@@ -91,7 +92,8 @@ const Navbar = () => {
                     value = {fullName}
                     sx={{
                         backgroundColor: neutralLight,
-                        width: "150px",
+                        minWidth: "150px",
+                        maxWidth: "250px",
                         borderRadius: "0.25rem",
                         p: "0.25rem 1rem",
                         "& .MuiSvgIcon-root" : {
