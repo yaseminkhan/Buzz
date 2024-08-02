@@ -143,8 +143,8 @@ const Form = () => {
                                     label = "Last Name"
                                     onBlur={handleBlur}
                                     onChange={handleChange}
-                                    value = {values.lastNameName}
-                                    name = "lastNameName"
+                                    value = {values.lastName}
+                                    name = "lastName"
                                     error = {Boolean(touched.lastName) && Boolean(errors.lastName)}
                                     helperText = {touched.lastName && errors.lastName}
                                     sx = {{ gridColumn: "span 2"}}
