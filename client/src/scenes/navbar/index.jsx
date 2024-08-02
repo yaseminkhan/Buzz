@@ -27,7 +27,7 @@ import FlexBetween from "components/FlexBetween";
 
 
 const Navbar = () => {
-    const [isMobileMenuToggled, setisMobileMenuToggled] = useState(false);
+    const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
@@ -113,14 +113,14 @@ const Navbar = () => {
             </FlexBetween>
         ): (
             <IconButton
-            onClick={()=> setisMobileMenuToggled(!isMobileMenuToggled)}
+            onClick={()=> setIsMobileMenuToggled(!isMobileMenuToggled)}
             >
                 <Menu />
             </IconButton>
         )}
 
         {/* MOBILE NAV */}
-        {!isNonMobileScreens && isMobileMenuToggled(
+        {!isNonMobileScreens && isMobileMenuToggled && (
             <Box
                 position = "fixed"
                 right= "0"
@@ -134,7 +134,7 @@ const Navbar = () => {
              {/* CLOSE ICON */}
                 <Box display="flex" justifyContent= "flex-end" p="1rem">
                     <IconButton 
-                        onClick={()=> setisMobileMenuToggled(!isMobileMenuToggled)}
+                        onClick={()=> setIsMobileMenuToggled(!isMobileMenuToggled)}
                     >
                     <Close />
                     </IconButton>
