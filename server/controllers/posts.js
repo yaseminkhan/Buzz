@@ -6,7 +6,7 @@ export const createPost = async(req, res) => {
     try{
         const { userId, description, picturePath} = req.body;
         const user = await User.findById(userId);
-        const newPost = newPost({
+        const newPost = new Post({
             userId, 
             firstName: user.firstName,
             lastName: user.lastName,
@@ -24,7 +24,7 @@ export const createPost = async(req, res) => {
     } catch(err) {
         res.status(409).json({ message: err.message })
     }
-}
+};
 
 /* READ */
 export const getFeedPosts = async (req, res) => {
