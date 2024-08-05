@@ -12,10 +12,8 @@ import {
 } from "@mui/material";
 import {
   Search,
-  Message,
   DarkMode,
   LightMode,
-  Notifications,
   Help,
   Menu,
   Close,
@@ -76,7 +74,7 @@ const Navbar = () => {
 
         {/* DESKTOP NAV */}
         {isNonMobileScreens ? (
-            <FlexBetween gap = "2rem">
+            <FlexBetween gap = "0.75rem">
                 <IconButton onClick={() => dispatch(setMode())}>
                     {theme.palette.mode === "dark" ? (
                         <DarkMode sx ={{fontSize: "25px"}}/>
@@ -84,10 +82,8 @@ const Navbar = () => {
                         <LightMode sx ={{ color: dark, fontSize: "25px"}}/>
                     )}
                 </IconButton>
-                <Message sx ={{fontSize: "25px"}}/>
-                <Notifications sx ={{fontSize: "25px"}}/>
                 <Help sx ={{fontSize: "25px"}}/>
-                <FormControl variant = "standard" value = {fullName}>
+                <FormControl variant = "standard" value = {fullName} sx={{ ml: "0.5rem" }}>
                     <Select
                     value = {fullName}
                     sx={{
@@ -158,8 +154,6 @@ const Navbar = () => {
                             <LightMode sx ={{ color: dark, fontSize: "25px"}}/>
                         )}
                     </IconButton>
-                    <Message sx ={{fontSize: "25px"}}/>
-                    <Notifications sx ={{fontSize: "25px"}}/>
                     <Help sx ={{fontSize: "25px"}}/>
                     <FormControl variant = "standard" value = {fullName}>
                         <Select

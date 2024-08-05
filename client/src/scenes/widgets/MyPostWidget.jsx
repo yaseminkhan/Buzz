@@ -4,10 +4,9 @@ import {
     AttachFileOutlined,
     GifBoxOutlined,
     ImageOutlined,
-    MicOutlined,
     MoreHorizOutlined,
-  } from "@mui/icons-material";
-  import {
+} from "@mui/icons-material";
+import {
     Box,
     Divider,
     Typography,
@@ -16,14 +15,14 @@ import {
     Button,
     IconButton,
     useMediaQuery,
-  } from "@mui/material";
-  import FlexBetween from "components/FlexBetween";
-  import Dropzone from "react-dropzone";
-  import UserImage from "components/UserImage";
-  import WidgetWrapper from "components/WidgetWrapper";
-  import { useState } from "react";
-  import { useDispatch, useSelector } from "react-redux";
-  import { setPosts } from "state";
+} from "@mui/material";
+import FlexBetween from "components/FlexBetween";
+import Dropzone from "react-dropzone";
+import UserImage from "components/UserImage";
+import WidgetWrapper from "components/WidgetWrapper";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPosts } from "state";
 
 const MyPostWidget = ({picturePath}) =>{
     const dispatch = useDispatch();
@@ -143,17 +142,13 @@ const MyPostWidget = ({picturePath}) =>{
                             <Typography color = {mediumMain}>Attachment</Typography>
                         </FlexBetween>
 
-                        <FlexBetween gap="0.25rem">
-                            <MicOutlined sx = {{ color: mediumMain}} />
-                            <Typography color = {mediumMain}>Audio</Typography>
-                        </FlexBetween>
                     </>
                 ) : (
                     <FlexBetween gap="0.25rem">
                         <MoreHorizOutlined sx = {{ color: mediumMain}} />
                     </FlexBetween>
                 )}
-                
+
                 <Button
                     disabled={!post}
                     onClick={handlePost}
