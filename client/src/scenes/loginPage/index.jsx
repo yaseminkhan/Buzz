@@ -31,7 +31,7 @@ const LoginPage = () => {
                 <Typography fontWeight="500" variant="h5" sx={{mb: "1.5rem"}}>
                     Join the Buzz!
                 </Typography>
-                <Form/>
+                <Form pageType="login"/>
             </Box>
         </Box>
     );

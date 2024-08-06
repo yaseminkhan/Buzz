@@ -1,6 +1,5 @@
 import {
     ManageAccountsOutlined,
-    EditOutlined,
     LocationOnOutlined,
     WorkOutlineOutlined
 } from "@mui/icons-material";
@@ -44,8 +43,9 @@ const UserWidget = ({userId, picturePath}) =>{
         lastName,
         location,
         occupation,
-        viewedProfile,
-        impressions,
+        bio,
+        socialMediaURL,
+        networkingURL,
         friends
     } = user;
 
@@ -56,9 +56,8 @@ const UserWidget = ({userId, picturePath}) =>{
             <FlexBetween
                 gap="0.5rem"
                 pb="1.1rem"
-                onClick={() => navigate(`/profile/${userId}`)}
             >
-                <FlexBetween gap="1rem">
+                <FlexBetween gap="1rem" onClick={() => navigate(`/profile/${userId}`)}>
                     <UserImage image={picturePath} />
                     <Box>
                         <Typography
@@ -67,7 +66,7 @@ const UserWidget = ({userId, picturePath}) =>{
                             fontWeight="500"
                             sx={{
                                 "&:hover" : {
-                                    color: palette.primary.light,
+                                    color: medium,
                                     cursor: "pointer"
                                 }
                             }}
@@ -77,7 +76,15 @@ const UserWidget = ({userId, picturePath}) =>{
                         <Typography color={medium}>{friends.length} friends</Typography>
                     </Box>
                 </FlexBetween>
-                <ManageAccountsOutlined />
+                <ManageAccountsOutlined 
+                    sx={{
+                        "&:hover": {
+                            cursor: "pointer",
+                            color: medium
+                        }
+                    }}
+                    onClick={() => navigate(`/edit-profile/${userId}`)}
+                />
             </FlexBetween>
             
                 <Divider />
@@ -99,12 +106,7 @@ const UserWidget = ({userId, picturePath}) =>{
                 {/* THIRD ROW */}
                 <Box p="1rem 0">
                     <FlexBetween mb="0.5rem">
-                        <Typography color={medium}>Who's viewed your profile</Typography>
-                        <Typography color={main} fontWeight="500">{viewedProfile}</Typography>
-                    </FlexBetween>
-                    <FlexBetween>
-                        <Typography color={medium}>Impressions of your post</Typography>
-                        <Typography color={main} fontWeight="500">{impressions}</Typography>
+                        <Typography color={main}>{bio}</Typography>
                     </FlexBetween>
                 </Box>
 
@@ -117,30 +119,45 @@ const UserWidget = ({userId, picturePath}) =>{
                     </Typography>
                     
                     <FlexBetween gap="1rem" mb="0.5rem">
-                        <FlexBetween gap="1rem">
+                        <FlexBetween gap="1rem" onClick={() => window.open(socialMediaURL, '_blank')}>
                             <img src="../assets/insta.png" alt="instagram" style={{ width: '30px', height: '30px' }}/>
                             <Box>
-                                <Typography color={main} fontWeight="500">
+                                <Typography 
+                                color={main} 
+                                fontWeight="500"
+                                sx={{
+                                    "&:hover" : {
+                                        color: medium,
+                                        cursor: "pointer"
+                                    }
+                                }}
+                                >
                                   Instagram 
                                 </Typography>
                                 <Typography color={medium}>Social Media</Typography>
                             </Box>
                         </FlexBetween>
-                        <EditOutlined sx={{color: main}} />
                     </FlexBetween>
 
 
                     <FlexBetween gap="1rem">
-                        <FlexBetween gap="1rem">
+                        <FlexBetween gap="1rem" onClick={() => window.open(networkingURL, '_blank')}>
                             <img src="../assets/linkedIn-color.png" alt="linkedin" style={{ width: '30px', height: '30px' }}/>
                             <Box>
-                                <Typography color={main} fontWeight="500">
+                                <Typography color={main} 
+                                fontWeight="500"
+                                sx={{
+                                    "&:hover" : {
+                                        color: medium,
+                                        cursor: "pointer"
+                                    }
+                                }}
+                                >
                                   LinkedIn  
                                 </Typography>
                                 <Typography color={medium}>Networking Platform</Typography>
                             </Box>
                         </FlexBetween>
-                        <EditOutlined sx={{color: main}} />
                     </FlexBetween>
                 </Box>
         </WidgetWrapper>

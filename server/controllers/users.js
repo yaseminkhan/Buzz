@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Post from "../models/Post.js"; 
 
 /* READ*/
 export const getUser = async (req, res) =>{
@@ -8,8 +9,8 @@ export const getUser = async (req, res) =>{
         res.status(200).json(user);
     } catch(err){
         res.status(404).json({message: error.message});
-    }
-}
+    };
+};
 
 export const getUserFriends = async (req, res) => {
     try{
@@ -27,7 +28,7 @@ export const getUserFriends = async (req, res) => {
         res.status(200).json(formattedFriends);
     } catch (err){
         res.status(404).json({message: err.message});
-    }  
+    };
 };
 
 /* UPDATE */
@@ -59,5 +60,46 @@ export const addRemoveFriend = async(req, res) => {
         res.status(200).json(formattedFriends);
     } catch (err){
         res.status(404).json({message: err.message});
+    };
+};
+
+export const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { firstName, lastName, location, occupation, bio, socialMediaURL, networkingURL } = req.body;
+        const picturePath = req.file ? req.file.filename : null;
+
+        const user = await User.findById(id);
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        // Update user info
+        user.firstName = firstName || user.firstName;
+        user.lastName = lastName || user.lastName;
+        user.location = location || user.location;
+        user.occupation = occupation || user.occupation;
+        user.picturePath = picturePath || user.picturePath;
+        user.bio = bio || user.bio;
+        user.socialMediaURL = socialMediaURL || user.socialMediaURL;
+        user.networkingURL = networkingURL || user.networkingURL;
+
+        await user.save();
+
+        const updateFields = {
+            ...(picturePath && { userPicturePath: picturePath }),
+            ...(firstName && { firstName }),
+            ...(lastName && { lastName }),
+        };
+
+        if (Object.keys(updateFields).length > 0) {
+            await Post.updateMany(
+                { userId: id },
+                { $set: updateFields }
+            );
+        };
+
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(404).json({ message: err.message });
     }
-}
+};
