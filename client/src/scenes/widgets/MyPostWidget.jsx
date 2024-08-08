@@ -37,7 +37,6 @@ const MyPostWidget = ({picturePath, isProfilePage}) =>{
     const medium = palette.neutral.medium;
     
     const handlePost = async () => {
-        console.log('isProfilePage:', isProfilePage); // Add this log to check isProfilePage value
         const formData = new FormData();
         formData.append("userId", _id);
         formData.append("description", post);

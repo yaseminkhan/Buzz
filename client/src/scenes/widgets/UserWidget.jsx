@@ -20,6 +20,7 @@ const UserWidget = ({userId, picturePath}) =>{
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
+    const { _id } = useSelector((state) => state.user);
 
     const getUser = async () => {
         const response = await fetch(`http://localhost:3001/users/${userId}`, {
@@ -76,15 +77,17 @@ const UserWidget = ({userId, picturePath}) =>{
                         <Typography color={medium}>{friends.length} friends</Typography>
                     </Box>
                 </FlexBetween>
+               {userId === _id && (
                 <ManageAccountsOutlined 
-                    sx={{
-                        "&:hover": {
-                            cursor: "pointer",
-                            color: medium
-                        }
-                    }}
-                    onClick={() => navigate(`/edit-profile/${userId}`)}
-                />
+                        sx={{
+                            "&:hover": {
+                                cursor: "pointer",
+                                color: medium
+                            }
+                        }}
+                        onClick={() => navigate(`/edit-profile/${userId}`)}
+                    />
+                )}
             </FlexBetween>
             
                 <Divider />
@@ -101,65 +104,73 @@ const UserWidget = ({userId, picturePath}) =>{
                     </Box>
                 </Box>
 
-                <Divider />
 
                 {/* THIRD ROW */}
-                <Box p="1rem 0">
-                    <FlexBetween mb="0.5rem">
-                        <Typography color={main}>{bio}</Typography>
-                    </FlexBetween>
-                </Box>
+                {bio &&(
+                    <>
+                        <Divider />
+                        
+                        <Box p="1rem 0" alignItems="center">
+                            <Typography color={main}>{bio}</Typography>
+                        </Box>
 
-                <Divider />
+                    </>
+                )}
 
                 {/* FOURTH ROW */}
-                <Box p="1rem 0">
-                    <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
-                        Social Profiles
-                    </Typography>
-                    
-                    <FlexBetween gap="1rem" mb="0.5rem">
-                        <FlexBetween gap="1rem" onClick={() => window.open(socialMediaURL, '_blank')}>
-                            <img src="../assets/insta.png" alt="instagram" style={{ width: '30px', height: '30px' }}/>
-                            <Box>
-                                <Typography 
-                                color={main} 
-                                fontWeight="500"
-                                sx={{
-                                    "&:hover" : {
-                                        color: medium,
-                                        cursor: "pointer"
-                                    }
-                                }}
-                                >
-                                  Instagram 
-                                </Typography>
-                                <Typography color={medium}>Social Media</Typography>
-                            </Box>
-                        </FlexBetween>
-                    </FlexBetween>
+                {(socialMediaURL || networkingURL) && (
+                    <>
+                        <Divider />
+
+                        <Box p="1rem 0">
+                            <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
+                                Social Profiles
+                            </Typography>
+                            
+                            <FlexBetween gap="1rem" mb="0.5rem">
+                                <FlexBetween gap="1rem" onClick={() => window.open(socialMediaURL, '_blank')}>
+                                    <img src="../assets/insta.png" alt="instagram" style={{ width: '30px', height: '30px' }}/>
+                                    <Box>
+                                        <Typography 
+                                        color={main} 
+                                        fontWeight="500"
+                                        sx={{
+                                            "&:hover" : {
+                                                color: medium,
+                                                cursor: "pointer"
+                                            }
+                                        }}
+                                        >
+                                        Instagram 
+                                        </Typography>
+                                        <Typography color={medium}>Social Media</Typography>
+                                    </Box>
+                                </FlexBetween>
+                            </FlexBetween>
 
 
-                    <FlexBetween gap="1rem">
-                        <FlexBetween gap="1rem" onClick={() => window.open(networkingURL, '_blank')}>
-                            <img src="../assets/linkedIn-color.png" alt="linkedin" style={{ width: '30px', height: '30px' }}/>
-                            <Box>
-                                <Typography color={main} 
-                                fontWeight="500"
-                                sx={{
-                                    "&:hover" : {
-                                        color: medium,
-                                        cursor: "pointer"
-                                    }
-                                }}
-                                >
-                                  LinkedIn  
-                                </Typography>
-                                <Typography color={medium}>Networking Platform</Typography>
-                            </Box>
-                        </FlexBetween>
-                    </FlexBetween>
-                </Box>
+                            <FlexBetween gap="1rem">
+                                <FlexBetween gap="1rem" onClick={() => window.open(networkingURL, '_blank')}>
+                                    <img src="../assets/linkedIn-color.png" alt="linkedin" style={{ width: '30px', height: '30px' }}/>
+                                    <Box>
+                                        <Typography color={main} 
+                                        fontWeight="500"
+                                        sx={{
+                                            "&:hover" : {
+                                                color: medium,
+                                                cursor: "pointer"
+                                            }
+                                        }}
+                                        >
+                                        LinkedIn  
+                                        </Typography>
+                                        <Typography color={medium}>Networking Platform</Typography>
+                                    </Box>
+                                </FlexBetween>
+                            </FlexBetween>
+                        </Box>
+                    </>
+                )}
         </WidgetWrapper>
     );
 };

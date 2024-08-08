@@ -18,13 +18,10 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   };
 
   const getUserPosts = async () => {
-    const response = await fetch(
-      `http://localhost:3001/posts/${userId}`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await fetch(`http://localhost:3001/posts/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };
@@ -41,18 +38,21 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     <>
       {Array.isArray(posts) && posts.length > 0 ? (
         posts.map(
-          ({
-            _id,
-            userId,
-            firstName,
-            lastName,
-            description,
-            location,
-            picturePath,
-            userPicturePath,
-            likes,
-            comments,
-          }) => (
+          (
+            {
+              _id,
+              userId,
+              firstName,
+              lastName,
+              description,
+              location,
+              picturePath,
+              userPicturePath,
+              likes,
+              comments,
+            },
+            index
+          ) => (
             <PostWidget
               key={_id}
               postId={_id}
@@ -64,6 +64,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
               userPicturePath={userPicturePath}
               likes={likes}
               comments={comments}
+              isProfilePage={isProfile}
+              isFirstPost={index === 0}
             />
           )
         )
