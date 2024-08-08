@@ -2,29 +2,37 @@ import Post from "../models/Post.js";
 import User from "../models/User.js";
 
 /* CREATE */
-export const createPost = async(req, res) => {
-    try{
-        const { userId, description, picturePath} = req.body;
-        const user = await User.findById(userId);
-        const newPost = new Post({
-            userId, 
-            firstName: user.firstName,
-            lastName: user.lastName,
-            location: user.location,
-            description,
-            userPicturePath: user.picturePath,
-            picturePath,
-            likes: {},
-            comments: []
-        })
-        await newPost.save();
-        
-        const post = await Post.find().sort({ createdAt: -1 });
-        res.status(201).json(post);
-    } catch(err) {
-        res.status(409).json({ message: err.message })
+export const createPost = async (req, res) => {
+    try {
+      const { userId, description, picturePath } = req.body;
+      const { isProfilePage } = req.query;
+      console.log('isProfilePage (backend):', isProfilePage); // Add this log to check isProfilePage value
+      const user = await User.findById(userId);
+      const newPost = new Post({
+        userId,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        location: user.location,
+        description,
+        userPicturePath: user.picturePath,
+        picturePath,
+        likes: {},
+        comments: [],
+      });
+      await newPost.save();
+  
+      let posts;
+      if (isProfilePage === "true") {
+        posts = await Post.find({ userId }).sort({ createdAt: -1 });
+      } else {
+        posts = await Post.find().sort({ createdAt: -1 });
+      }
+  
+      res.status(201).json(posts);
+    } catch (err) {
+      res.status(409).json({ message: err.message });
     }
-};
+  };
 
 /* READ */
 export const getFeedPosts = async (req, res) => {
