@@ -11,6 +11,10 @@ const userIds = [
   new mongoose.Types.ObjectId(),
 ];
 
+const getRandomDate = (start, end) => {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+};
+
 export const users = [
   {
     _id: userIds[0],
@@ -22,10 +26,9 @@ export const users = [
     friends: [],
     location: "San Fran, CA",
     occupation: "Software Engineer",
-    viewedProfile: 14561,
-    impressions: 888822,
-    createdAt: 1115211422,
-    updatedAt: 1115211422,
+    bio: "Passionate about coding and coffee.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
   {
@@ -38,10 +41,9 @@ export const users = [
     friends: [],
     location: "New York, CA",
     occupation: "Degenerate",
-    viewedProfile: 12351,
-    impressions: 55555,
-    createdAt: 1595589072,
-    updatedAt: 1595589072,
+    bio: "Living life one day at a time.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
   {
@@ -54,10 +56,9 @@ export const users = [
     friends: [],
     location: "Canada, CA",
     occupation: "Data Scientist Hacker",
-    viewedProfile: 45468,
-    impressions: 19986,
-    createdAt: 1288090662,
-    updatedAt: 1288090662,
+    bio: "Data is the new oil.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
   {
@@ -70,10 +71,9 @@ export const users = [
     friends: [],
     location: "Korea, CA",
     occupation: "Educator",
-    viewedProfile: 41024,
-    impressions: 55316,
-    createdAt: 1219214568,
-    updatedAt: 1219214568,
+    bio: "Educating the next generation.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
   {
@@ -86,10 +86,9 @@ export const users = [
     friends: [],
     location: "Utah, CA",
     occupation: "Hacker",
-    viewedProfile: 40212,
-    impressions: 7758,
-    createdAt: 1493463661,
-    updatedAt: 1493463661,
+    bio: "Breaking systems and building them stronger.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
   {
@@ -102,10 +101,9 @@ export const users = [
     friends: [],
     location: "Los Angeles, CA",
     occupation: "Journalist",
-    viewedProfile: 976,
-    impressions: 4658,
-    createdAt: 1381326073,
-    updatedAt: 1381326073,
+    bio: "Reporting the truth one story at a time.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
   {
@@ -118,10 +116,9 @@ export const users = [
     friends: [],
     location: "Chicago, IL",
     occupation: "Nurse",
-    viewedProfile: 1510,
-    impressions: 77579,
-    createdAt: 1714704324,
-    updatedAt: 1642716557,
+    bio: "Helping people stay healthy.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
   {
@@ -134,10 +131,9 @@ export const users = [
     friends: [],
     location: "Washington, DC",
     occupation: "A Student",
-    viewedProfile: 19420,
-    impressions: 82970,
-    createdAt: 1369908044,
-    updatedAt: 1359322268,
+    bio: "Learning new things every day.",
+    createdAt: new Date(),
+    updatedAt: new Date(),
     __v: 0,
   },
 ];
@@ -163,6 +159,8 @@ export const posts = [
       "another random comment",
       "yet another random comment",
     ],
+    createdAt: getRandomDate(new Date(2020, 0, 1), new Date()),
+    updatedAt: getRandomDate(new Date(2020, 0, 1), new Date()),
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -186,6 +184,8 @@ export const posts = [
       "no more random comments",
       "I lied, one more random comment",
     ],
+    createdAt: getRandomDate(new Date(2020, 0, 1), new Date()),
+    updatedAt: getRandomDate(new Date(2020, 0, 1), new Date()),
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -210,6 +210,8 @@ export const posts = [
       "Why am I doing this?",
       "I'm bored",
     ],
+    createdAt: getRandomDate(new Date(2020, 0, 1), new Date()),
+    updatedAt: getRandomDate(new Date(2020, 0, 1), new Date()),
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -234,6 +236,8 @@ export const posts = [
       "All I want to do is play video games",
       "I'm going to play video games",
     ],
+    createdAt: getRandomDate(new Date(2020, 0, 1), new Date()),
+    updatedAt: getRandomDate(new Date(2020, 0, 1), new Date()),
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -258,6 +262,8 @@ export const posts = [
       "What should I do?",
       "I'm going to play video games",
     ],
+    createdAt: getRandomDate(new Date(2020, 0, 1), new Date()),
+    updatedAt: getRandomDate(new Date(2020, 0, 1), new Date()),
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -273,7 +279,6 @@ export const posts = [
       [userIds[1], true],
       [userIds[2], true],
     ]),
-
     comments: [
       "Can I play video games now?",
       "No let's actually study",
@@ -281,5 +286,34 @@ export const posts = [
       "Stop it.",
       "Michael, stop it.",
     ],
+    createdAt: getRandomDate(new Date(2020, 0, 1), new Date()),
+    updatedAt: getRandomDate(new Date(2020, 0, 1), new Date()),
+  },
+];
+
+export const ads = [
+  {
+    adId: "1",
+    title: "Snake",
+    URL: "https://github.com/yaseminkhan",
+    URL_name: "GitHub",
+    description: "Check out my Snake game made using C for Raspberry Pi. It uses an SNES controller and is inspired by retro arcade games!",
+    picturePath: "info4.jpeg",
+  },
+  {
+    adId: "2",
+    title: "TicTacToe Game",
+    URL: "https://github.com/yaseminkhan",
+    URL_name: "GitHub",
+    description: "Check out my TicTacToe game made with Swift!",
+    picturePath: "info2.jpeg",
+  },
+  {
+    adId: "3",
+    title: "CPU Scheduler",
+    URL: "https://github.com/yaseminkhan",
+    URL_name: "GitHub",
+    description: "Explore my CPU Scheduler project!",
+    picturePath: "info3.jpeg",
   },
 ];

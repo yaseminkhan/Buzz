@@ -35,7 +35,6 @@ import {
     const { _id } = useSelector((state) => state.user);
   
     const { palette } = useTheme();
-    const primary = palette.primary.main;
     const main = palette.neutral.main;
   
     const patchLike = async () => {
@@ -99,7 +98,7 @@ import {
             <FlexBetween gap="0.3rem">
               <IconButton onClick={patchLike}>
                 {isLiked ? (
-                  <FavoriteOutlined sx={{ color: primary }} />
+                  <FavoriteOutlined sx={{ color: "red" }} />
                 ) : (
                   <FavoriteBorderOutlined />
                 )}
