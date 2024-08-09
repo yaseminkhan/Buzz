@@ -1,17 +1,19 @@
+import { format } from 'date-fns';
 import {
-    ChatBubbleOutlineOutlined,
-    FavoriteBorderOutlined,
-    FavoriteOutlined,
-    ShareOutlined,
-    DeleteOutline
-  } from "@mui/icons-material";
-  import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
-  import FlexBetween from "components/FlexBetween";
-  import Friend from "components/Friend";
-  import WidgetWrapper from "components/WidgetWrapper";
-  import { useState } from "react";
-  import { useDispatch, useSelector } from "react-redux";
-  import { setPost, removePost } from "state";
+  ChatBubbleOutlineOutlined,
+  FavoriteBorderOutlined,
+  FavoriteOutlined,
+  ShareOutlined,
+  DeleteOutline
+} from "@mui/icons-material";
+import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import FlexBetween from "components/FlexBetween";
+import Friend from "components/Friend";
+import WidgetWrapper from "components/WidgetWrapper";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPost, removePost } from "state";
+
   
   const PostWidget = ({
     postId,
@@ -21,6 +23,7 @@ import {
     location,
     picturePath,
     userPicturePath,
+    createdAt,
     likes = {},
     comments = [],
     isProfilePage = false,
@@ -72,13 +75,15 @@ import {
           console.error("Failed to delete post", err);
         }
       };      
-  
+
+    const formattedDate = createdAt ? format(new Date(createdAt), 'PP p') : 'Date not available';
+
     return (
       <WidgetWrapper m={isProfilePage && isFirstPost ? "0" : "1.5rem 0"}>
         <Friend
           friendId={postUserId}
           name={name}
-          subtitle={location}
+          subtitle={`${location} • ${formattedDate}`}
           userPicturePath={userPicturePath}
         />
         <Typography color={main} sx={{ mt: "1rem" }}>

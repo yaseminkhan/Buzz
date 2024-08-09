@@ -50,6 +50,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
               userPicturePath,
               likes,
               comments,
+              createdAt,
             },
             index
           ) => (
@@ -66,6 +67,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
               comments={comments}
               isProfilePage={isProfile}
               isFirstPost={index === 0}
+              createdAt={createdAt}
             />
           )
         )

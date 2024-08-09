@@ -66,7 +66,7 @@ export const addRemoveFriend = async(req, res) => {
 export const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const { firstName, lastName, location, occupation, bio, socialMediaURL, networkingURL } = req.body;
+        const { firstName, lastName, location, occupation, bio, socialMediaURL, socialMediaPlatform, networkingURL, networkingPlatform } = req.body;
         const picturePath = req.file ? req.file.filename : null;
 
         const user = await User.findById(id);
@@ -76,12 +76,14 @@ export const updateUser = async (req, res) => {
         // Update user info
         user.firstName = firstName || user.firstName;
         user.lastName = lastName || user.lastName;
-        user.location = location || user.location;
-        user.occupation = occupation || user.occupation;
+        user.location = location;
+        user.occupation = occupation;
         user.picturePath = picturePath || user.picturePath;
-        user.bio = bio || user.bio;
-        user.socialMediaURL = socialMediaURL || user.socialMediaURL;
-        user.networkingURL = networkingURL || user.networkingURL;
+        user.bio = bio;
+        user.socialMediaURL = socialMediaURL;
+        user.socialMediaPlatform = socialMediaPlatform;
+        user.networkingURL = networkingURL;
+        user.networkingPlatform = networkingPlatform;
 
         await user.save();
 
