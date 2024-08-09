@@ -15,6 +15,17 @@ const ProfilePage = () => {
     const loggedInUserId = useSelector((state) => state.user._id);
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
+    useEffect(() => {
+        document.title = 'Buzz - Profile';
+
+        // Set the favicon
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        link.href = `/favicon.png`; 
+        document.head.appendChild(link);
+
+    });
+
     const getUser = async() => {
         const response = await fetch(`http://localhost:3001/users/${userId}`, {
             method: "GET",

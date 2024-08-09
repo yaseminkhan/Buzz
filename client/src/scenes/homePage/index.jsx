@@ -6,10 +6,22 @@ import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import AdvertWidget from "scenes/widgets/AdvertWidget";
 import FriendListWidget from "scenes/widgets/FriendListWidget";
+import { useEffect } from "react";
 
 const HomePage = () => {
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const {_id, picturePath} = useSelector((state) => state.user);
+
+    useEffect(() => {
+        document.title = 'Buzz - Home';
+
+        // Set the favicon
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        link.href = `/favicon.png`; 
+        document.head.appendChild(link);
+
+    });
 
     return( 
         <Box>

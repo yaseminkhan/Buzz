@@ -16,7 +16,7 @@ const registerSchema = yup.object().shape({
     password: yup.string().required("required"),
     location: yup.string().max(100, "Location must be less than  100 characters"),
     occupation: yup.string().max(100, "Occupation must be less than 100 characters"),
-    picture: yup.string().required("required"),
+    picture: yup.string(),
 });
 
 const loginSchema = yup.object().shape({
@@ -29,7 +29,7 @@ const editSchema = yup.object().shape({
     lastName: yup.string().required("required").min(2, "Last Name must be at least 2 characters").max(50, "Last Name must be less than  50 characters"),
     location: yup.string().max(100, "Location must be less than  100 characters"),
     occupation: yup.string().max(100, "Occupation must be less than 100 characters"),
-    picture: yup.string().required("required"),
+    picture: yup.string(),
     bio: yup.string().max(100, "Bio must be less than 100 characters"),
     socialMediaURL: yup.string(),
     socialMediaPlatform: yup.string(),
@@ -52,20 +52,22 @@ const initialValuesLogin = {
     password: ""
 };
 
+const initialValuesEdit = {
+    firstName: '',
+    lastName: '',
+    location: '',
+    occupation: '',
+    picture: '',
+    bio: '',
+    socialMediaURL: '',
+    socialMediaPlatform: '',
+    networkingURL: '',
+    networkingPlatform: ''
+};
+
 const Form = ({ userId, pageType: initialPageType }) => {
     const [pageType, setPageType] = useState(initialPageType);
-    const [initialValuesEdit, setInitialValuesEdit] = useState({
-        firstName: '',
-        lastName: '',
-        location: '',
-        occupation: '',
-        picture: '',
-        bio: '',
-        socialMediaURL: '',
-        socialMediaPlatform: '',
-        networkingURL: '',
-        networkingPlatform: ''
-    });
+    const [initialValuesEditState, setInitialValuesEditState] = useState(initialValuesEdit);
     const { palette } = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -74,6 +76,24 @@ const Form = ({ userId, pageType: initialPageType }) => {
     const isRegister = pageType === "register";
     const isEdit = pageType === "edit";
     const token = useSelector((state) => state.token);
+    const user = useSelector((state) => state.user);
+
+    useEffect(() => {
+        if (isLogin) {
+            document.title = 'Buzz - Login';
+        } else if (isRegister) {
+            document.title = 'Buzz - Register';
+        } else if (isEdit) {
+            document.title = 'Buzz - Edit';
+        }
+
+        // Set the favicon
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        link.href = `/favicon.png`; 
+        document.head.appendChild(link);
+
+    }, [isLogin, isRegister, isEdit]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -83,16 +103,16 @@ const Form = ({ userId, pageType: initialPageType }) => {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const data = await response.json();
-                setInitialValuesEdit({
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    location: data.location,
-                    occupation: data.occupation,
-                    picture: data.picturePath,
-                    bio: data.bio,
-                    socialMediaURL: data.socialMediaURL,
+                setInitialValuesEditState({
+                    firstName: data.firstName || '',
+                    lastName: data.lastName || '',
+                    location: data.location || '',
+                    occupation: data.occupation || '',
+                    picture: data.picturePath || '',
+                    bio: data.bio || '',
+                    socialMediaURL: data.socialMediaURL || '',
                     socialMediaPlatform: data.socialMediaPlatform || '',
-                    networkingURL: data.networkingURL,
+                    networkingURL: data.networkingURL || '',
                     networkingPlatform: data.networkingPlatform || ''
                 });
             }
@@ -106,7 +126,11 @@ const Form = ({ userId, pageType: initialPageType }) => {
         for (let value in values) {
             formData.append(value, values[value]);
         }
-        formData.append("picturePath", values.picture.name);
+        if (values.picture) {
+            formData.append("picturePath", values.picture.name);
+        } else {
+            formData.append("picturePath", "profile.jpeg");
+        }
 
         const savedUserResponse = await fetch(
             "http://localhost:3001/auth/register",
@@ -185,10 +209,14 @@ const Form = ({ userId, pageType: initialPageType }) => {
         if (isEdit) await editProfile(values, onSubmitProps);
     };
 
+    if (isEdit && user._id !== userId) {
+        return <div>You must be logged in to update your profile.</div>;
+    }
+
     return (
         <Formik
             onSubmit={handleFormSubmit}
-            initialValues={isLogin ? initialValuesLogin : isRegister ? initialValuesRegister : initialValuesEdit}
+            initialValues={isLogin ? initialValuesLogin : isRegister ? initialValuesRegister : initialValuesEditState}
             validationSchema={isLogin ? loginSchema : isRegister ? registerSchema : editSchema}
             enableReinitialize
         >

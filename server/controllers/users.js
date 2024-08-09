@@ -67,7 +67,11 @@ export const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { firstName, lastName, location, occupation, bio, socialMediaURL, socialMediaPlatform, networkingURL, networkingPlatform } = req.body;
-        const picturePath = req.file ? req.file.filename : null;
+        const picturePath = req.file ? req.file.filename : '';
+
+        if (req.user.id !== id) {
+            return res.status(403).json({ message: "You do not have permission to update this user" });
+        }
 
         const user = await User.findById(id);
 
@@ -78,7 +82,7 @@ export const updateUser = async (req, res) => {
         user.lastName = lastName || user.lastName;
         user.location = location;
         user.occupation = occupation;
-        user.picturePath = picturePath || user.picturePath;
+        user.picturePath = picturePath || 'profile.jpeg'; 
         user.bio = bio;
         user.socialMediaURL = socialMediaURL;
         user.socialMediaPlatform = socialMediaPlatform;
