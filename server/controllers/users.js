@@ -82,7 +82,7 @@ export const updateUser = async (req, res) => {
         user.lastName = lastName || user.lastName;
         user.location = location;
         user.occupation = occupation;
-        user.picturePath = picturePath || 'profile.jpeg'; 
+        user.picturePath = picturePath || user.picturePath || 'profile.jpeg'; 
         user.bio = bio;
         user.socialMediaURL = socialMediaURL;
         user.socialMediaPlatform = socialMediaPlatform;
