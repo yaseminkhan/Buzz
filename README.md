@@ -24,6 +24,7 @@ Before you begin, ensure you have the following installed:
 ### 1. Clone the Repository
 
 git clone https://github.com/yourusername/BuzzSocial.git
+
 cd BuzzSocial
 
 ### 2. Set Up Environment Variables
@@ -34,7 +35,9 @@ cp .env.example .env
 Edit the .env file and fill in the required values:
 
 MONGO_URL=mongodb://localhost:27017/BuzzSocial
+
 PORT=3001
+
 JWT_SECRET=your_jwt_secret_key
 
 - MONGO_URL: The MongoDB connection string. If you're running MongoDB locally, you can use the provided value.
@@ -49,11 +52,11 @@ npm install
 ### 4. Run the Application 
 You'll need to run the backend and frontend servers separately in two different terminals:
 
-# Terminal 1: Start the Backend Server
+#### Terminal 1: Start the Backend Server
 cd server
 npm start
 
-# Terminal 2: Start the Frontend Server
+#### Terminal 2: Start the Frontend Server
 cd frontend
 npm start
 
