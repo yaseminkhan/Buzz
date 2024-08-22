@@ -54,10 +54,12 @@ You'll need to run the backend and frontend servers separately in two different 
 
 #### Terminal 1: Start the Backend Server
 cd server
+
 npm start
 
 #### Terminal 2: Start the Frontend Server
 cd frontend
+
 npm start
 
 ### 5. Access the Application
