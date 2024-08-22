@@ -7,10 +7,7 @@ BuzzSocial is a social media-inspired web application built using the MERN (Mong
 - User authentication (Login, Registration)
 - Profile management with user info editing
 - Dynamic ad display
-- Post creation, liking, and commenting (planned)
-- Search functionality (planned)
-- Google OAuth and two-factor authentication (planned)
-- Real-time notifications (planned)
+- Post creation and liking
 
 ## Prerequisites
 
