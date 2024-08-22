@@ -34,7 +34,10 @@ function App() {
               path="/edit-profile/:id" 
               element = {isAuth ? <EditPage /> : <Navigate to ="/" />}
             />
-            <Route path ="/about" element = {<AboutPage/>}/>
+            <Route 
+              path ="/about" 
+              element = {isAuth ? <AboutPage/> : <Navigate to ="/" />}
+            />
           </Routes>
         </ThemeProvider>
       </BrowserRouter>

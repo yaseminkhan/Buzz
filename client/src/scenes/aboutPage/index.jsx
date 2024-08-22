@@ -2,9 +2,22 @@ import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import Navbar from "scenes/navbar";
 import WidgetWrapper from "components/WidgetWrapper";
+import { useEffect } from "react";
 
 const AboutPage = () => {
     const theme = useTheme();
+
+    useEffect(() => {
+        document.title = 'Buzz - About';
+        
+        //Set the favicon
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        link.href = `/favicon.png`; 
+        document.head.appendChild(link);
+
+    });
+
     return (
         <Box>
             <Navbar />
