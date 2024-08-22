@@ -14,9 +14,9 @@ import {
   Search,
   DarkMode,
   LightMode,
-  Help,
   Menu,
   Close,
+  Info,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
@@ -82,7 +82,9 @@ const Navbar = () => {
                         <LightMode sx ={{ color: dark, fontSize: "25px"}}/>
                     )}
                 </IconButton>
-                <Help sx ={{fontSize: "25px"}}/>
+                <IconButton onClick = {() => navigate("/about")}>
+                    <Info sx ={{fontSize: "25px"}}/>
+                </IconButton>
                 <FormControl variant = "standard" value = {fullName} sx={{ ml: "0.5rem" }}>
                     <Select
                     value = {fullName}
@@ -154,7 +156,9 @@ const Navbar = () => {
                             <LightMode sx ={{ color: dark, fontSize: "25px"}}/>
                         )}
                     </IconButton>
-                    <Help sx ={{fontSize: "25px"}}/>
+                    <IconButton onClick = {() => navigate("/about")}>
+                        <Info sx ={{fontSize: "25px"}}/>
+                    </IconButton>
                     <FormControl variant = "standard" value = {fullName}>
                         <Select
                         value = {fullName}

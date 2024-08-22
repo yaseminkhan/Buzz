@@ -196,6 +196,11 @@ const Form = ({ userId, pageType: initialPageType }) => {
             onSubmitProps.resetForm();
 
             if (updatedUser) {
+                //Update the Redux state with the new user data
+                dispatch(setLogin({
+                    user: updatedUser,
+                    token
+                }));
                 navigate(`/profile/${userId}`);
             }
         } catch (err) {

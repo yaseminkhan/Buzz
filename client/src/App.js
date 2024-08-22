@@ -8,6 +8,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme";
 import EditPage from "scenes/editProfile";
+import AboutPage from "scenes/aboutPage";
 
 function App() {
   const mode = useSelector(state => state.mode);
@@ -33,6 +34,7 @@ function App() {
               path="/edit-profile/:id" 
               element = {isAuth ? <EditPage /> : <Navigate to ="/" />}
             />
+            <Route path ="/about" element = {<AboutPage/>}/>
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
