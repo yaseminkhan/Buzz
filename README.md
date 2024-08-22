@@ -1,6 +1,6 @@
-# BuzzSocial
+# Buzz
 
-BuzzSocial is a social media-inspired web application developed using the MERN stack (MongoDB, Express, React, Node.js). This project focuses on full-stack development skills, featuring user authentication, dynamic content display, and a modern interface designed with Material-UI.
+Buzz is a social media-inspired web application developed using the MERN stack (MongoDB, Express, React, Node.js). This project focuses on full-stack development skills, featuring user authentication, dynamic content display, and a modern interface designed with Material-UI.
 
 ## Features
 
@@ -21,7 +21,7 @@ Before starting, ensure you have the following installed:
 
 ```bash
 git clone https://github.com/yourusername/BuzzSocial.git
-cd BuzzSocial
+cd Buzz
 ```
 
 ### 2. Set Up Environment Variables
